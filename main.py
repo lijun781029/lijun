@@ -401,13 +401,13 @@ class OilPriceApp(App):
             except:
                 history = []
         
-        content = BoxLayout(orientation='vertical', spacing=dp(10)), padding=dp(10))
-        scroll = ScrollView(size_hint=(1, 1)))
-        history_layout = GridLayout(cols=1, spacing=dp(5)), size_hint_y=None)
+        content = BoxLayout(orientation='vertical', spacing=dp(10), padding=dp(10))
+        scroll = ScrollView(size_hint=(1, 1))
+        history_layout = GridLayout(cols=1, spacing=dp(5), size_hint_y=None)
         history_layout.bind(minimum_height=history_layout.setter('height'))
         
         if not history:
-            history_layout.add_widget(Label(text="暂无查询历史", size_hint_y=None, height=dp(50))))
+            history_layout.add_widget(Label(text="暂无查询历史", size_hint_y=None, height=dp(50)))
         else:
             for record in history[:20]:  # 只显示最近的20条记录
                 time_str = record['query_time']
@@ -416,15 +416,16 @@ class OilPriceApp(App):
                     text=f"{time_str} - {location}",
                     size_hint_y=None,
                     height=dp(50)),
-                    background_color=(0.9, 0.9, 0.9, 1)
-                )
+                background_color=(0.9, 0.9, 0.9, 1)
+                
                 btn.bind(on_press=lambda b, r=record: self.show_history_detail(r))
                 history_layout.add_widget(btn)
         
         scroll.add_widget(history_layout)
         content.add_widget(scroll)
         
-        close_btn = Button(text='关闭', size_hint=(1, None), height=dp(50)))
+        close_btn = Button(text='关闭', size_hint=(1, None), height=dp(50))
+    
         content.add_widget(close_btn)
         
         popup = Popup(
